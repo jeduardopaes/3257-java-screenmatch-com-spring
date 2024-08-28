@@ -2,6 +2,7 @@ package br.com.alura.screenmatch;
 
 import br.com.alura.screenmatch.model.DadosEpisodio;
 import br.com.alura.screenmatch.model.DadosSerie;
+import br.com.alura.screenmatch.model.DadosTemporada;
 import br.com.alura.screenmatch.service.ConsumoApi;
 import br.com.alura.screenmatch.service.ConverteDados;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -34,12 +35,12 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
 		System.out.println(String.format("%n%n%s%n%n", dados));
 
-		DadosEpisodio episodio = conversor.obterDados(
+		DadosTemporada temporada = conversor.obterDados(
 				consumoApi
-						.obterDados("https://www.omdbapi.com/?t=supernatural&season=1&episode=1&apikey=" + dotenv.get("APIkey")),
-				DadosEpisodio.class);
+						.obterDados("https://www.omdbapi.com/?t=supernatural&season=1&apikey=" + dotenv.get("APIkey")),
+						DadosTemporada.class);
 
-		System.out.println(String.format("%n%n%s%n%n", episodio));
+		System.out.println(String.format("%n%n%s%n%n", temporada));
 
 	}
 }
