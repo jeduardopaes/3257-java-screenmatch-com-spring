@@ -13,12 +13,13 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class Principal {
 
     Dotenv dotenv = Dotenv.load();
-    private ConsumoApi consumoApi = new ConsumoApi();
-    private ConverteDados conversor = new ConverteDados();
-    private Scanner scan = new Scanner(System.in);
-    private final String ENDERECO = "https://www.omdbapi.com/?t=";
+
+    private final ConsumoApi consumoApi = new ConsumoApi();
+    private final ConverteDados conversor = new ConverteDados();
+    private final Scanner scan = new Scanner(System.in);
+    private static final String ENDERECO = "https://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=" + dotenv.get("APIkey");
-    private final String SEASONS_PARAM = "&season=";
+    private static final String SEASONS_PARAM = "&season=";
 
     public void displayMenu() {
         System.out.println("Digite o nome da serie que deseja buscar: ");
@@ -55,9 +56,9 @@ public class Principal {
 
         temporadas.forEach(season -> {
             System.out.println("================= Season: " + season.numero() + " =================");
-            season.episodios().forEach(episodio -> {
-                System.out.println(episodio.numeroEpisodio() + "- Episode Title: " + episodio.titulo());
-            });
+            season.episodios().forEach(episodio
+                    -> System.out.println(episodio.numeroEpisodio() + "- Episode Title: " + episodio.titulo())
+            );
             System.out.println("======================================");
         });
     }
